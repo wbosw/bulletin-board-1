@@ -8,10 +8,21 @@
 #  updated_at :datetime         not null
 #
 class Board < ApplicationRecord
-  def posts
+  def posts2
     my_id = self.id
-    matching_posts = Post.where({:board_id => my_id})
+    matching_posts = Post.where({:board_id => my_id}).order(:expires_on => :asc )
     return matching_posts
   end
-  has_many(:posts2, class_name:"Post", foreign_key:"board_id")
+  has_many(:posts, class_name:"Post", foreign_key:"board_id")
+
+  def active_posts
+    active_posts = self.posts.where("expires_on > ?", Date.today)
+    return active_posts
+  end
+
+  def expired_posts
+    expired_posts = self.posts.where("expires_on < ?", Date.today)
+    return expired_posts
+  end
+
 end
