@@ -11,8 +11,5 @@
 #  board_id   :integer
 #
 class Post < ApplicationRecord
-  def board_posts
-    return "THERE"
-  end
-
+ 
 end

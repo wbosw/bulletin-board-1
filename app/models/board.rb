@@ -8,5 +8,10 @@
 #  updated_at :datetime         not null
 #
 class Board < ApplicationRecord
-  has_many(:posts, class_name:"post", foreign_key:"board_id")
+  def posts
+    my_id = self.id
+    matching_posts = Post.where({:board_id => my_id})
+    return matching_posts
+  end
+  has_many(:posts2, class_name:"Post", foreign_key:"board_id")
 end
