@@ -28,7 +28,7 @@ class PostsController < ApplicationController
       the_post.save
       redirect_to("/boards/#{the_post.board_id}", { :notice => "Post created successfully." })
     else
-      redirect_to("/boards", { :alert => the_post.errors.full_messages.to_sentence })
+      redirect_to("/boards/#{the_post.board_id}", { :alert => the_post.errors.full_messages.to_sentence })
     end
   end
 
